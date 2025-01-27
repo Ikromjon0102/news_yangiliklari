@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ category.name }} {% endblock %}
+
+
+{% block content %}
+
+  <section id="sliderSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+          <h1> {{ category.name }} yangiliklari </h1>
+          <ul class="spost_nav">
+            {% for news in news_list %}
+            <li>
+              <div class="media wow fadeInDown"> <a href="{{ news.get_absolute_url }}" class="media-left"> <img alt="" src="{{ news.image.url }}"> </a>
+                <div class="media-body"> <a href="{{ news.get_absolute_url }}" class="catg_title"> {{news.title}}</a>
+                <p>{{news.body|truncatewords:15}}</p> </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="latest_post">
+          <h2><span>So'nggi yangiliklar</span></h2>
+          <div class="latest_post_container">
+            <div id="prev-button"><i class="fa fa-chevron-up"></i></div>
+            <ul class="latest_postnav">
+              {% for news in lastest_news %}
+              <li>
+                <div class="media"> <a href="{{ news.get_absolute_url }}" class="media-left"> <img alt="" src="{{ news.image.url }}"> </a>
+                  <div class="media-body"> <a href="{{ news.get_absolute_url }}" class="catg_title"> {{ news.title }}</a> </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+            <div id="next-button"><i class="fa  fa-chevron-down"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ul>
+{% endblock %}
