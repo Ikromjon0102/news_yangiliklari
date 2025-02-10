@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <section id="contentSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="left_content">
+          <div class="single_page">
+              <hr>
+              <h1>Yangilikni o'chirish</h1>
+              <form action="" method="post">
+                  {% csrf_token %}
+                {{ news.title }} yangilikni o'chirmoqchimisiz?
+
+                <button type="submit"> Tasdiqlash </button>
+              </form>
+              <hr>
+          </div>
+          </div>
+          </div>
+          </div>
+  </section>
+{% endblock %}

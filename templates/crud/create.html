@@ -7,23 +7,24 @@
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="left_content">
           <div class="single_page">
-            <ol class="breadcrumb">
-              <li><a href="../index.html">Home</a></li>
-              <li><a href="#">Technology</a></li>
-              <li class="active">Mobile</li>
-            </ol>
-            <h1>{{ news.title }}</h1>
+              <hr>
+              <h1>Yangilik qo'shish</h1>
+              <form action="" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <button type="submit"> Saqlash </button>
+              </form>
+              <hr>
 
-
-            <div class="post_commentbox"> <a href="#"></a> <span><i class="fa fa-calendar"></i>{{ news.publish_time }}</span> <a href="#"><i class="fa fa-tags"></i>{{ news.category }}</a> </div>
-            <div class="single_page_content"> <img class="img-center" src="{{ news.image.url }}" alt="">
-              <p>{{ news.body }}</p>
-              <blockquote> {{news.body |truncatewords:40}} </blockquote>
-              <center>
-                <a href="{% url 'update_news' news.slug %}">Edit</a> |
-                <a href="{% url 'delete_news' news.slug %}">Delete</a>
-              </center>
-
+            <div class="social_link">
+              <ul class="sociallink_nav">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+              </ul>
+            </div>
             <div class="related_post">
               <h2>Related Post <i class="fa fa-thumbs-o-up"></i></h2>
               <ul class="spost_nav wow fadeInDown animated">

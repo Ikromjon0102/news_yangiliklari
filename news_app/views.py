@@ -1,5 +1,13 @@
-from django.shortcuts import render
+from audioop import reverse
+from venv import create
+
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic import DeleteView, UpdateView, CreateView
+
 from .models import Category, News, Photos
+from .forms import UpdateNewsForm, CreateNewsForm
 
 
 def news_list_view(request):
@@ -61,3 +69,84 @@ def category_list_view(request):
     category_list = Category.objects.all()
 
     return render(request, 'base.html', {'category_list':category_list})
+
+
+class UpdateNewsView(UpdateView):
+    model = News
+    fields = ('title', 'body', 'category', 'image','status')
+    template_name = 'crud/update.html'
+
+
+# class UpdateNewsView(View):
+#
+#     def get(self, request, news):
+#         news = News.objects.get(slug = news)
+#         form = UpdateNewsForm(instance=news)
+#
+#         context = {
+#             'news':news,
+#             'form':form
+#         }
+#         return render(request, 'crud/update.html', context)
+#
+#     def post(self, request, news):
+#         news = News.objects.get(slug = news)
+#         form = UpdateNewsForm(
+#             instance=news,
+#             data=request.POST,
+#             files = request.FILES)
+#
+#         if form.is_valid():
+#             form.save()
+#
+#             return redirect('news_list')
+#
+#         context = {
+#             'news':news,
+#             'form':form
+#         }
+#         return render(request, 'crud/update.html', context)
+#
+
+
+class DeleteNewsView(DeleteView):
+    model = News
+    template_name = 'crud/delete.html'
+    success_url = reverse_lazy('news_list')
+
+# class DeleteNewsView(View):
+#     def get(self, request, news):
+#         news = News.objects.get(slug = news)
+#         news.delete()
+#         return redirect('news_list')
+
+
+
+class CreateNewsView(CreateView):
+    model = News
+    fields = ['title', 'slug', 'category', 'body', 'image', 'status']
+    template_name = 'crud/create.html'
+
+# class CreateNewsView(View):
+#     def get(self, request):
+#         form  = CreateNewsForm
+#
+#         context = {
+#             'form':form
+#         }
+#         return render(request, 'crud/create.html', context)
+#
+#     def post(self, request):
+#         form = CreateNewsForm(data=request.POST,
+#                               files=request.FILES)
+#
+#         if form.is_valid():
+#             form.save()
+#             return redirect('news_list')
+#
+#         context = {
+#             'form': form
+#         }
+#         return render(request, 'crud/create.html', context)
+#
+
